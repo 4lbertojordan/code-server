@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  code-server-jordancodes:
+    build: .
+    volumes:
+       - /tools/code-server/config:/root/.config/code-server
+       - /tools/code-server/project:/root/.local/share/code-server
+    ports:
+      - 8340:80
+    restart: unless-stopped
