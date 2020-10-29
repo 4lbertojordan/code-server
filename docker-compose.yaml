@@ -2,8 +2,6 @@ version: "3.8"
 services:
   code-server-jordancodes:
     build: .
-    environment:
-      - DOMAIN=yourdomain
     volumes:
        - /tools/visual-studio/config:/root/.config/code-server
        - /tools/visual-studio/project:/root/.local/share/code-server
