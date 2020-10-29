@@ -18,14 +18,10 @@ RUN apt-get install -y \
     python3-certbot-nginx \
     # Reverse proxy
     nginx \
-    # Finish
-    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
     #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y
-
-ENV LANG en_US.utf8
 
 COPY start.sh /
 COPY code-server.conf /etc/nginx/sites-available/
