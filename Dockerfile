@@ -14,6 +14,8 @@ RUN apt-get install -y \
     ansible \
     mysql-client \
     postgresql-client \
+    certbot \
+    python3-certbot-nginx \
     # Reverse proxy
     nginx \
     # Finish

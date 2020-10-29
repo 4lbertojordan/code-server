@@ -5,6 +5,7 @@ services:
     volumes:
        - /tools/code-server/config:/root/.config/code-server
        - /tools/code-server/project:/root/.local/share/code-server
+       - /tools/code-server/certbot:/etc/letsencrypt
     ports:
-      - 8340:80
+      - 8340:8443
     restart: unless-stopped
