@@ -3,9 +3,9 @@ services:
   code-server-jordancodes:
     build: .
     volumes:
-       - /tools/code-server/config:/root/.config/code-server
-       - /tools/code-server/project:/root/.local/share/code-server
-       - /tools/code-server/certbot:/etc/letsencrypt
+       - /tools/visual-studio/config:/root/.config/code-server
+       - /tools/visual-studio/project:/root/.local/share/code-server
+       - /tools/visual-studio/certbot:/etc/letsencrypt
     ports:
       - 8340:8443
     restart: unless-stopped
