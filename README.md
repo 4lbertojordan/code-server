@@ -20,16 +20,31 @@ If you need anything, add new features in "# Utils" within Dockerfile
 
 ##### Nginx configuration
 
-Right now, I haven't included the SSL setup for NGINX yet.
+Right now, I´m using Letsencrypt to secure the connection.
+I´ve got generate a new certificate in local env. I attach the certificate trough volumes
 
-If you want to change the domain edit the code-server.conf file
+```bash
+    volumes:
+       - /tools/visual-studio/config:/root/.config/code-server
+       - /tools/visual-studio/project:/root/.local/share/code-server
+       - /tools/visual-studio/certbot:/etc/letsencrypt
+```
+
+If you want to change the domain edit the Dockerfile variable.
 
 ```nginx
 server {
-    listen 80;
-    listen [::]:80;
+    listen 8443 ssl;
+      ssl_certificate /etc/letsencrypt/live/yourdomain.com/cert.pem;
+      ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+      ssl_protocols TLSv1.2 TLSv1.3;
+      # Enable modern TLS cipher suites
+      ssl_ciphers 
+      'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
 
-    server_name yourdomain;
+# The order of cipher suites matters
+ssl_prefer_server_ciphers on;
+    server_name yourdomain.com;
 
     location / {
         proxy_pass http://localhost:8080/;
@@ -39,6 +54,9 @@ server {
     }
 }
 ```
+
+It´s very important secure Nginx to prevent future issues.
+I´m working to improve the security.
 
 ## Usage
 To check first in local without docker-compose and volumes.
@@ -58,6 +76,21 @@ docker-compose up
 docker-compose stop
 docker-compose down (optional)
 ```
+
+## Pending tasks
+
+Install more binaries.
+Improve the security on Nginx.
+Install fonts for ZSH and Powerleve10k.
+Set zsh as default prompt in Visual Studio.
+Set Dark theme as default.
+Connect to external Docker daemon.
+
+## Ideas
+
+Connect to Jenkins.
+Connect to Ansible Tower.
+Connect to Docker Dashboard.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
