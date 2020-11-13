@@ -1,6 +1,7 @@
 FROM ubuntu:focal
 
-ENV DOMAIN=localhost
+ENV DOMAIN="localhost"
+ENV TER_VER="0.13.5"
 
 RUN apt-get update \
     && apt-get -y upgrade && apt-get -y dist-upgrade
@@ -19,6 +20,9 @@ RUN apt-get install -y \
     certbot \
     python3-certbot-nginx \
     unzip \
+    default-jre \
+    maven \
+    groovy \
     # Reverse proxy
     nginx \
     #
@@ -29,9 +33,8 @@ RUN apt-get install -y \
 # Install extra
 # Terraform
 RUN cd /tmp \
-    && TER_VER="curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | cut -d: -f2 | tr -d \"\,\v | awk '{$1=$1};1'" \
     && wget https://releases.hashicorp.com/terraform/${TER_VER}/terraform_${TER_VER}_linux_amd64.zip \
-    && unzip terraform_${VER}_linux_amd64.zip \
+    && unzip terraform_${TER_VER}_linux_amd64.zip \
     && mv terraform /usr/local/bin/ \
     && which terraform \
     && terraform -v
@@ -65,21 +68,6 @@ server { \n\
 
 # Install Code Server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
-
-# Install ZSH wit Powerlevel10k
-RUN sh -c "$(curl -fsSL https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
-    -a 'CASE_SENSITIVE="true"' \
-    -t https://github.com/denysdovhan/spaceship-prompt \
-    -a 'SPACESHIP_PROMPT_ADD_NEWLINE="false"' \
-    -a 'SPACESHIP_PROMPT_SEPARATE_LINE="false"' \
-    -p git \
-    -p https://github.com/zsh-users/zsh-autosuggestions \
-    -p https://github.com/zsh-users/zsh-completions \
-    -p https://github.com/zsh-users/zsh-history-substring-search \
-    -p https://github.com/zsh-users/zsh-syntax-highlighting \
-    -p 'history-substring-search' \
-    -a 'bindkey "\$terminfo[kcuu1]" history-substring-search-up' \
-    -a 'bindkey "\$terminfo[kcud1]" history-substring-search-down'
 
 EXPOSE 8340
 

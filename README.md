@@ -7,12 +7,6 @@ All the sources used to make this repository:
 #### Code Server 
 https://github.com/cdr/code-server
 
-#### ZSH Docker
-https://github.com/deluan/zsh-in-docker/
-
-#### ZSH POWERLEVEL10K
-https://github.com/romkatv/powerlevel10k
-
 ## Installation
 
 I'm using Dockerfile to include all features ad-hoc.
@@ -86,8 +80,6 @@ docker-compose down (optional)
 
 Install more binaries.
 Improve the security on Nginx.
-Install fonts for ZSH and Powerleve10k.
-Set zsh as default prompt in Visual Studio.
 Set Dark theme as default.
 Connect to external Docker daemon.
 
