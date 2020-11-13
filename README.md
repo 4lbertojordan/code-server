@@ -15,13 +15,18 @@ https://github.com/romkatv/powerlevel10k
 
 ## Installation
 
-I'm using Dockerfile to include all features ad-hoc
-If you need anything, add new features in "# Utils" within Dockerfile
+I'm using Dockerfile to include all features ad-hoc.
+If you need anything, add new features in "# Utils" within Dockerfile.
 
 ##### Nginx configuration
 
 Right now, I´m using Letsencrypt to secure the connection.
-I´ve got generate a new certificate in local env. I attach the certificate trough volumes
+
+```bash
+certbot certonly --standalone --preferred-challenges http -d
+```
+
+I have generated a new certificate in local env. I attach the certificate through persisten volumes.
 
 ```bash
     volumes:
