@@ -9,3 +9,5 @@ services:
     ports:
       - 8340:8443
     restart: unless-stopped
+networks:
+  - bridge

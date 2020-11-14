@@ -10,6 +10,8 @@ RUN apt-get install -y \
     apt-utils \
     ca-certificates \
     --no-install-recommends \
+    apt-transport-https \
+    software-properties-common \
     # Utils
     wget \
     curl \
@@ -23,6 +25,8 @@ RUN apt-get install -y \
     default-jre \
     maven \
     groovy \
+    docker.io \
+    docker-compose
     # Reverse proxy
     nginx \
     #
